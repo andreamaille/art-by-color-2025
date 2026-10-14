@@ -31,7 +31,7 @@ export async function fetchArt() {
     searchQueries[Math.floor(Math.random() * searchQueries.length)];
 
   const response = await fetch(
-    `https://api.artic.edu/api/v1/artworks/search?q=${selectedSearchQuery}&fields=${fields}&page=1&limit=25`
+    `https://api.artic.edu/api/v1/artworks/search?q=${selectedSearchQuery}&fields=${fields}&page=1&limit=25`,
   );
   const result = await response.json();
 
