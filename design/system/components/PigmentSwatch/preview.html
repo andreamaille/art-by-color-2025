@@ -1,0 +1,7 @@
+<!-- @dsCard group="Search" height=150 subtitle="Pressed: Ultramarine" -->
+<div id="row" style="display:flex;flex-wrap:wrap;gap:12px;padding:24px;background:var(--wall)"></div>
+<script>
+var p=[["cadmium-red","Cadmium Red","red"],["cadmium-orange","Cadmium Orange","orange"],["cadmium-yellow","Cadmium Yellow","yellow"],["sap-green","Sap Green","olive"],["viridian","Viridian","green"],["cobalt-teal","Cobalt Teal","teal"],["cerulean","Cerulean","light blue"],["ultramarine","Ultramarine","blue"],["dioxazine-violet","Dioxazine Violet","violet"],["quinacridone-rose","Quinacridone Rose","pink"],["burnt-sienna","Burnt Sienna","brown"],["paynes-grey","Payne's Grey","grey"],["ivory-black","Ivory Black","black"],["titanium-white","Titanium White","white"]];
+var row=document.getElementById('row');
+p.forEach(function(x){var b=document.createElement('button');b.type='button';b.className='abc-pigment';b.setAttribute('aria-pressed',x[0]==='ultramarine'?'true':'false');b.setAttribute('aria-label',x[1]+', '+x[2]);b.innerHTML='<span class="abc-pigment__dot" style="background:var(--pigment-'+x[0]+')"></span><span class="abc-pigment__name">'+x[1]+'</span>';b.onclick=function(){row.querySelectorAll('.abc-pigment').forEach(function(o){o.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true')};row.appendChild(b)});
+</script>

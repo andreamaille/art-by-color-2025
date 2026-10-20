@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Art by Color · Gallery</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../components.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--wall:#FAFAF8;--paper:#FFFFFF;--ink:#141413;--graphite:#5B5A55;--hairline:#DCDAD3;--field-border:#8C8A83;--focus:#2C3FC7;--font-display:"Bodoni Moda",Didot,Georgia,serif;--font-sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--radius-none:0px;--radius-sm:2px;--radius-pill:999px}
+body{margin:0;background:#FAFAF8}
+a{color:#2C3FC7}a:hover{color:#141413}
+.row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;border:0;border-top:1px solid #DCDAD3;background:transparent;padding:16px 0;text-align:left;cursor:pointer;color:#141413;font:inherit}
+.row:focus-visible{outline:2px solid #2C3FC7;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #FAFAF8; color: #141413; font-family: 'Schibsted Grotesk', Arial, sans-serif">
+  <div style="max-width: 1376px; margin: 0 auto; padding: 0 32px; box-sizing: border-box">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 28px 0; border-bottom: 1px solid #DCDAD3">
+      <a href="Main.dc.html" style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 28px; color: #141413; text-decoration: none; letter-spacing: -0.3px">Art by <em>Color</em></a>
+      <nav aria-label="Main" style="display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500">
+        <a href="Main.dc.html" aria-current="page" style="color: #141413; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px">Gallery</a>
+        <a href="Main.dc.html" style="color: #141413; text-decoration: none">Saved palettes</a>
+        <a href="Main.dc.html" style="color: #141413; text-decoration: none">About</a>
+      </nav>
+    </header>
+
+    <section style="display: flex; flex-wrap: wrap; gap: 48px 64px; padding: 88px 0 72px; align-items: flex-end">
+      <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+        <span class="abc-eyebrow">The Art Institute of Chicago, by color</span>
+        <h1 style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 112px; line-height: 0.92; letter-spacing: -2px; text-wrap: balance">Find the <em>palette</em> hiding in a painting.</h1>
+        <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.6; color: #5B5A55">Pick a pigment or paste a hex code. We find works in the collection built from that color, then pull a five-color palette from each one for you to copy.</p>
+      </div>
+      <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; display: flex; flex-direction: column; gap: 12px">
+        <span class="abc-eyebrow">Palette of the day</span>
+        <img src="../images/machu-picchu-morning-light.jpg" alt="Peru – Machu Picchu, Morning Light by Georgia O'Keeffe" style="display: block; width: 100%">
+        <span class="abc-strip" style="height: 10px"><span style="background: #13341F"></span><span style="background: #2E5398"></span><span style="background: #809FCD"></span><span style="background: #B5AD2C"></span><span style="background: #E9F4EA"></span></span>
+        <figcaption style="font-size: 13px; color: #5B5A55; line-height: 1.45"><span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 17px; color: #141413">Peru – Machu Picchu, Morning Light</span><br>Georgia O'Keeffe, 1957</figcaption>
+      </figure>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 48px 64px; border-top: 1px solid #141413; padding-top: 32px">
+      <aside aria-label="Search" style="flex: 1 1 260px; max-width: 300px; display: flex; flex-direction: column">
+        <span class="abc-eyebrow" style="padding-bottom: 16px">Index</span>
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+          <div style="display: flex; flex-direction: column">
+            <button type="button" class="row" aria-expanded="{{r.expanded}}" onClick="{{r.toggle}}">
+              <span style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+                <span class="abc-eyebrow">{{r.label}}</span>
+                <span style="display: flex; align-items: center; gap: 10px; font-family: 'Bodoni Moda', Georgia, serif; font-style: italic; font-size: 22px; line-height: 1.2">
+                  <sc-if value="{{r.isColor}}" hint-placeholder-val="{{false}}"><span style="width: 18px; height: 18px; border-radius: 999px; flex: none; background: {{hex}}"></span></sc-if>
+                  {{r.value}}
+                </span>
+              </span>
+              <span aria-hidden="true" style="font-size: 20px; line-height: 1; padding-top: 22px; color: #5B5A55">{{r.sign}}</span>
+            </button>
+            <sc-if value="{{r.showPigments}}" hint-placeholder-val="{{false}}">
+              <div style="display: flex; flex-direction: column; gap: 14px; padding: 0 0 20px">
+                <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px">
+                  <sc-for list="{{pigments}}" as="p" hint-placeholder-count="14">
+                    <button type="button" class="abc-pigment" aria-pressed="{{p.pressed}}" aria-label="{{p.label}}" title="{{p.name}}" onClick="{{p.pick}}" style="width: 40px; height: 44px; justify-content: center">
+                      <span class="abc-pigment__dot" style="width: 28px; height: 28px; background: {{p.hex}}"></span>
+                    </button>
+                  </sc-for>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #8C8A83; min-height: 44px">
+                  <label for="hexm" class="abc-eyebrow" style="flex: none">Or hex</label>
+                  <input id="hexm" value="{{hex}}" style="flex: 1; min-width: 0; border: 0; background: transparent; outline: none; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #141413">
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="border-top: 1px solid #DCDAD3; padding-top: 16px">
+          <button type="button" class="abc-btn abc-btn--ghost" style="padding: 0">Clear all</button>
+        </div>
+      </aside>
+
+      <section aria-label="Results" style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding-top: 34px">
+        <div style="columns: 3 220px; column-gap: 32px">
+          <sc-for list="{{cards}}" as="c" hint-placeholder-count="6">
+            <a href="Details.dc.html" class="abc-card" style="margin-bottom: 56px; gap: 0">
+              <img class="abc-card__img" src="{{c.img}}" alt="{{c.alt}}">
+              <span aria-label="Palette" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; margin-top: 4px">
+                <span style="height: 36px; background: {{c.p1}}"></span><span style="height: 36px; background: {{c.p2}}"></span><span style="height: 36px; background: {{c.p3}}"></span><span style="height: 36px; background: {{c.p4}}"></span><span style="height: 36px; background: {{c.p5}}"></span>
+              </span>
+              <h3 class="abc-card__title" style="font-size: 20px; margin-top: 16px">{{c.title}}</h3>
+              <span class="abc-card__meta" style="margin-top: 6px">{{c.meta}}</span>
+            </a>
+          </sc-for>
+        </div>
+        <div style="display: flex; justify-content: center; padding-bottom: 64px">
+          <button type="button" class="abc-btn abc-btn--primary">Show more works</button>
+        </div>
+      </section>
+    </div>
+
+    <footer style="border-top: 1px solid #141413; padding: 28px 0 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #5B5A55">
+      <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 20px; color: #141413">Art by <em>Color</em></span>
+      <span>Images and data from the <a href="https://www.artic.edu">Art Institute of Chicago</a> API. Made by andrea_codes.</span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 'ultramarine', open: 'color' };
+  }
+  renderVals() {
+    var self = this;
+    var list = [
+      ['cadmium-red', 'Cadmium Red', 'red', '#C8372D'], ['cadmium-orange', 'Cadmium Orange', 'orange', '#E0782B'],
+      ['cadmium-yellow', 'Cadmium Yellow', 'yellow', '#EDC12B'], ['sap-green', 'Sap Green', 'olive', '#6E8B2E'],
+      ['viridian', 'Viridian', 'green', '#2E7D63'], ['cobalt-teal', 'Cobalt Teal', 'teal', '#2A8E98'],
+      ['cerulean', 'Cerulean', 'light blue', '#3E8FD0'], ['ultramarine', 'Ultramarine', 'blue', '#2C3FC7'],
+      ['dioxazine-violet', 'Dioxazine Violet', 'violet', '#5B3A92'], ['quinacridone-rose', 'Quinacridone Rose', 'pink', '#C94C7E'],
+      ['burnt-sienna', 'Burnt Sienna', 'brown', '#8A4A2B'], ['paynes-grey', "Payne's Grey", 'grey', '#4E5A65'],
+      ['ivory-black', 'Ivory Black', 'black', '#1E1D1B'], ['titanium-white', 'Titanium White', 'white', '#F4F2EC']
+    ];
+    var cur = list.filter(function (x) { return x[0] === self.state.picked; })[0] || list[7];
+    var open = this.state.open;
+    var defs = [['color', 'Color', cur[1]], ['medium', 'Medium', 'Painting'], ['date', 'Date', '1800 to 1950'], ['place', 'Place', 'Anywhere'], ['find', 'Artist or title', 'Anyone']];
+    var cards = [
+      { img: '../images/blue-and-green-music.jpg', title: 'Blue and Green Music', meta: "Georgia O'Keeffe, 1919/21", alt: "Blue and Green Music by Georgia O'Keeffe", p1: '#322C30', p2: '#335E4A', p3: '#41838C', p4: '#8BB881', p5: '#AFD1CF' },
+      { img: '../images/arrival-of-the-normandy-train.jpg', title: 'Arrival of the Normandy Train, Gare Saint-Lazare', meta: 'Claude Monet, 1877', alt: 'Arrival of the Normandy Train, Gare Saint-Lazare by Claude Monet', p1: '#252E33', p2: '#536457', p3: '#5E737D', p4: '#7F8F92', p5: '#ABB1B2' },
+      { img: '../images/machu-picchu-morning-light.jpg', title: 'Peru – Machu Picchu, Morning Light', meta: "Georgia O'Keeffe, 1957", alt: "Peru – Machu Picchu, Morning Light by Georgia O'Keeffe", p1: '#13341F', p2: '#2E5398', p3: '#809FCD', p4: '#B5AD2C', p5: '#E9F4EA' },
+      { img: '../images/abiquiu-sand-hills-and-mesa.jpg', title: 'Abiquiu Sand Hills and Mesa', meta: "Georgia O'Keeffe, 1945", alt: "Abiquiu Sand Hills and Mesa by Georgia O'Keeffe", p1: '#494C41', p2: '#6D6A56', p3: '#8D8269', p4: '#9FBDC5', p5: '#CFB792' },
+      { img: '../images/woman-mending.jpg', title: 'Woman Mending', meta: 'Camille Pissarro, 1895', alt: 'Woman Mending by Camille Pissarro', p1: '#4F4A4F', p2: '#6B6A6A', p3: '#858178', p4: '#AB9E8E', p5: '#C7C1B0' },
+      { img: '../images/thanksgiving.jpg', title: 'Thanksgiving', meta: 'Doris Lee, c. 1935', alt: 'Thanksgiving by Doris Lee', p1: '#2A1B1B', p2: '#62382A', p3: '#625244', p4: '#9A795D', p5: '#A7A189' }
+    ];
+    return {
+      rows: defs.map(function (d) {
+        var on = open === d[0];
+        return {
+          label: d[1], value: d[2], isColor: d[0] === 'color', showPigments: d[0] === 'color' && on,
+          expanded: on ? 'true' : 'false', sign: on ? '−' : '+',
+          toggle: function () { self.setState({ open: on ? '' : d[0] }); }
+        };
+      }),
+      pigments: list.map(function (x) {
+        return { name: x[1], hex: x[3], label: x[1] + ', ' + x[2], pressed: x[0] === self.state.picked ? 'true' : 'false', pick: function () { self.setState({ picked: x[0] }); } };
+      }),
+      cards: cards, hex: cur[3]
+    };
+  }
+}
+</script>
+</body>
+</html>
