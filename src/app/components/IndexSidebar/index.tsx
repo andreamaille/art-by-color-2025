@@ -1,24 +1,117 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { type ReactNode, useState } from "react";
 import Button from "@/app/components/Button";
 import Eyebrow from "@/app/components/Eyebrow";
-import { pigments } from "@/app/data/pigments";
+import { placeSuggestions } from "@/app/data/places";
+import { parseColorParam } from "@/app/lib/color";
+import { type Filters, MEDIA, toQueryString } from "@/app/lib/filters";
+import ColorPanel from "./ColorPanel";
+import DatePanel from "./DatePanel";
+import MediumPanel from "./MediumPanel";
+import TextPanel from "./TextPanel";
 
-const facets = [
-  { id: "color", label: "Color" },
-  { id: "medium", label: "Medium", value: "Painting" },
-  { id: "date", label: "Date", value: "1800 to 1950" },
-  { id: "place", label: "Place", value: "Anywhere" },
-  { id: "find", label: "Artist or title", value: "Anyone" },
-] as const;
+type FacetId = "color" | "medium" | "date" | "place" | "find";
 
-// UI only: opening rows and picking a pigment changes what the sidebar shows,
-// not the gallery.
-const IndexSidebar = () => {
-  const [open, setOpen] = useState<string>("color");
-  const [picked, setPicked] = useState<string>("ultramarine");
-  const pigment = pigments.find((p) => p.slug === picked) ?? pigments[7];
+function mediumSummary(media: Filters["media"]) {
+  return MEDIA.filter((m) => media.includes(m.slug))
+    .map((m) => m.label)
+    .join(", ");
+}
+
+function dateSummary({ from, to }: Filters) {
+  if (from !== undefined && to !== undefined) return `${from} to ${to}`;
+  if (from !== undefined) return `From ${from}`;
+  if (to !== undefined) return `Up to ${to}`;
+  return "Any date";
+}
+
+// Every facet lives in the URL, so the page re-renders on the server with
+// matching works and any combination can be shared.
+const IndexSidebar = ({ filters }: { filters: Filters }) => {
+  const router = useRouter();
+  const [open, setOpen] = useState<FacetId | "">("color");
+
+  const update = (patch: Partial<Filters>) => {
+    const query = toQueryString({ ...filters, ...patch });
+    router.replace(query ? `/?${query}` : "/", { scroll: false });
+  };
+
+  const facets: {
+    id: FacetId;
+    label: string;
+    value: string;
+    dot?: string;
+    panel: ReactNode;
+  }[] = [
+    {
+      id: "color",
+      label: "Color",
+      value: filters.color?.name ?? "Any color",
+      dot: filters.color && `#${filters.color.hex}`,
+      panel: (
+        <ColorPanel
+          selection={filters.color}
+          onChange={(value) =>
+            update({ color: value ? parseColorParam(value) : undefined })
+          }
+        />
+      ),
+    },
+    {
+      id: "medium",
+      label: "Medium",
+      value: mediumSummary(filters.media),
+      panel: (
+        <MediumPanel
+          media={filters.media}
+          onChange={(media) => update({ media })}
+        />
+      ),
+    },
+    {
+      id: "date",
+      label: "Date",
+      value: dateSummary(filters),
+      panel: (
+        <DatePanel
+          from={filters.from}
+          to={filters.to}
+          onChange={(range) => update(range)}
+        />
+      ),
+    },
+    {
+      id: "place",
+      label: "Place",
+      value: filters.place ?? "Anywhere",
+      panel: (
+        <TextPanel
+          id="place-input"
+          label="Place"
+          placeholder="France"
+          value={filters.place}
+          suggestions={placeSuggestions}
+          onChange={(place) => update({ place })}
+        />
+      ),
+    },
+    {
+      id: "find",
+      label: "Artist or title",
+      value: filters.q ?? "Anyone",
+      panel: (
+        <TextPanel
+          id="find-input"
+          label="Search"
+          placeholder="Monet, water lilies"
+          value={filters.q}
+          onChange={(q) => update({ q })}
+        />
+      ),
+    },
+  ];
 
   return (
     <aside
@@ -28,7 +121,6 @@ const IndexSidebar = () => {
       <Eyebrow className="pb-4">Index</Eyebrow>
       {facets.map((facet) => {
         const expanded = open === facet.id;
-        const isColor = facet.id === "color";
         return (
           <div key={facet.id} className="flex flex-col">
             <button
@@ -41,13 +133,13 @@ const IndexSidebar = () => {
               <span className="flex min-w-0 flex-col gap-1.5">
                 <Eyebrow>{facet.label}</Eyebrow>
                 <span className="flex items-center gap-2.5 font-display text-[22px] leading-[1.2] italic">
-                  {isColor && (
+                  {facet.dot && (
                     <span
                       className="size-[18px] flex-none rounded-full"
-                      style={{ background: pigment.hex }}
+                      style={{ background: facet.dot }}
                     />
                   )}
-                  {isColor ? pigment.name : facet.value}
+                  <span className="min-w-0 break-words">{facet.value}</span>
                 </span>
               </span>
               <span
@@ -57,45 +149,17 @@ const IndexSidebar = () => {
                 {expanded ? "−" : "+"}
               </span>
             </button>
-            {isColor && expanded && (
-              <div id="facet-color" className="flex flex-col gap-3.5 pb-5">
-                <div className="grid grid-cols-7 gap-0.5">
-                  {pigments.map((p) => (
-                    <button
-                      key={p.slug}
-                      type="button"
-                      className="group inline-flex h-11 w-10 cursor-pointer items-center justify-center border-0 bg-transparent p-0 outline-none"
-                      aria-pressed={p.slug === picked}
-                      aria-label={`${p.name}, ${p.term}`}
-                      title={p.name}
-                      onClick={() => setPicked(p.slug)}
-                    >
-                      <span
-                        className="block size-7 rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)] transition-transform group-hover:scale-110 group-aria-pressed:shadow-[0_0_0_3px_var(--wall),0_0_0_4px_var(--ink)] group-focus-visible:shadow-[0_0_0_3px_var(--wall),0_0_0_5px_var(--focus)] motion-reduce:transition-none"
-                        style={{ background: p.hex }}
-                      />
-                    </button>
-                  ))}
-                </div>
-                <div className="flex min-h-11 items-center gap-2 border-b border-field-border">
-                  <Eyebrow as="label" htmlFor="hex-input" className="flex-none">
-                    Or hex
-                  </Eyebrow>
-                  <input
-                    id="hex-input"
-                    key={pigment.hex}
-                    defaultValue={pigment.hex}
-                    spellCheck={false}
-                    className="min-w-0 flex-1 border-0 bg-transparent font-mono text-sm text-ink outline-none"
-                  />
-                </div>
-              </div>
-            )}
+            {expanded && <div id={`facet-${facet.id}`}>{facet.panel}</div>}
           </div>
         );
       })}
       <div className="border-t border-hairline pt-4">
-        <Button variant="ghost">Clear all</Button>
+        <Button
+          variant="ghost"
+          onClick={() => router.replace("/", { scroll: false })}
+        >
+          Clear all
+        </Button>
       </div>
     </aside>
   );
