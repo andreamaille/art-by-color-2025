@@ -36,7 +36,7 @@ const Gallery = async () => {
         <div key={item.id}>
           <div>Test: {item.artist_title}</div>
           <img
-            src={`https://www.artic.edu/iiif/2/${item.image_id}/full/400,/0/default.jpg`}
+            src={`/api/image/${item.image_id}?w=400`}
             alt=""
           />
         </div>

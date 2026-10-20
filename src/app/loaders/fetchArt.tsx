@@ -31,9 +31,12 @@ export async function fetchArt() {
     searchQueries[Math.floor(Math.random() * searchQueries.length)];
 
   const response = await fetch(
-    `https://api.artic.edu/api/v1/artworks/search?q=${selectedSearchQuery}&fields=${fields}&page=1&limit=25`
+    `https://api.artic.edu/api/v1/artworks/search?q=${selectedSearchQuery}&fields=${fields}&page=1&limit=25`,
+    { headers: { "AIC-User-Agent": "art-by-color (andrea.maille@gmail.com)" } },
   );
   const result = await response.json();
+
+  console.log("result", result);
 
   if (!response.ok) {
     throw new Error("Failed to fetch users");
