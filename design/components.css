@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap");
+
+/* Art by Color: component styles. Every value comes from tokens.css; load it first. */
+
+.abc-eyebrow { font-family: var(--font-sans); font-size: 12px; line-height: 1.3; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--graphite); }
+.abc-rule { border: 0; border-top: 1px solid var(--hairline); margin: 0; }
+.abc-hex { font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: 0.3px; }
+
+/* Button */
+.abc-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-5); border-radius: var(--radius-pill); border: 1px solid transparent; font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: 0.2px; text-decoration: none; cursor: pointer; transition: background-color .15s, color .15s; }
+.abc-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.abc-btn--primary { background: var(--ink); color: var(--wall); }
+.abc-btn--primary:hover { background: var(--graphite); }
+.abc-btn--secondary { background: transparent; color: var(--ink); border-color: var(--field-border); }
+.abc-btn--secondary:hover { border-color: var(--ink); }
+.abc-btn--ghost { background: transparent; color: var(--ink); padding: 0 var(--space-2); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+/* Pigment swatch: the color search control */
+.abc-pigment { display: inline-flex; flex-direction: column; align-items: center; gap: var(--space-2); background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink); font-family: var(--font-sans); }
+.abc-pigment__dot { display: block; width: 40px; height: 40px; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); transition: transform .15s; }
+.abc-pigment:hover .abc-pigment__dot { transform: scale(1.08); }
+.abc-pigment[aria-pressed="true"] .abc-pigment__dot { box-shadow: 0 0 0 3px var(--wall), 0 0 0 4px var(--ink); }
+.abc-pigment:focus-visible { outline: none; }
+.abc-pigment:focus-visible .abc-pigment__dot { box-shadow: 0 0 0 3px var(--wall), 0 0 0 5px var(--focus); }
+.abc-pigment__name { font-size: 11px; line-height: 1.2; color: var(--graphite); max-width: 64px; text-align: center; }
+.abc-pigment[aria-pressed="true"] .abc-pigment__name { color: var(--ink); font-weight: 600; }
+
+/* Palette swatch: one extracted color, click to copy */
+.abc-swatch { display: flex; flex-direction: column; gap: var(--space-2); background: none; border: 0; padding: 0; text-align: left; cursor: pointer; color: inherit; font-family: var(--font-sans); }
+.abc-swatch__chip { display: block; width: 100%; aspect-ratio: 3 / 4; border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
+.abc-swatch__name { font-size: 13px; font-weight: 500; }
+.abc-swatch__value { font-family: var(--font-mono); font-size: 13px; font-weight: 500; opacity: .78; }
+.abc-swatch:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+
+/* Palette strip: the five colors at a glance (legacy thin strip) */
+.abc-strip { display: flex; height: 6px; width: 100%; }
+.abc-strip > span { flex: 1; }
+
+/* Card swatches: five rectangles directly under an artwork image */
+.abc-card__swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-1); margin-top: calc(var(--space-3) * -1 + var(--space-1)); }
+.abc-card__swatches > span { height: 36px; }
+
+/* Artwork card */
+.abc-card { display: flex; flex-direction: column; gap: var(--space-3); text-decoration: none; color: var(--ink); break-inside: avoid; }
+.abc-card__img { display: block; width: 100%; height: auto; border-radius: var(--radius-none); }
+.abc-card__title { font-family: var(--font-display); font-size: 22px; line-height: 1.25; font-weight: 400; margin: 0; }
+.abc-card__meta { font-family: var(--font-sans); font-size: 13px; line-height: 1.45; color: var(--graphite); }
+.abc-card:hover .abc-card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.abc-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 6px; }
+
+/* Filter chip */
+.abc-chip { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 40px; padding: 0 var(--space-4); border-radius: var(--radius-pill); border: 1px solid var(--field-border); background: transparent; color: var(--ink); font-family: var(--font-sans); font-size: 14px; font-weight: 500; cursor: pointer; }
+.abc-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--wall); }
+.abc-chip:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* Search field */
+.abc-field { display: flex; align-items: center; gap: var(--space-2); border-bottom: 1px solid var(--ink); min-height: 48px; }
+.abc-field input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font-family: var(--font-display); font-style: italic; font-size: 22px; outline: none; }
+.abc-field input::placeholder { color: var(--graphite); }
+.abc-field:focus-within { border-bottom-width: 2px; border-color: var(--focus); }
+.abc-field button { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+
+/* Wall label: artwork metadata set like a museum label */
+.abc-label { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: var(--space-3) var(--space-5); margin: 0; font-family: var(--font-sans); font-size: 14px; line-height: 1.5; }
+.abc-label dt { font-size: 12px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--graphite); padding-top: 2px; }
+.abc-label dd { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) { .abc-pigment__dot, .abc-btn { transition: none; } }

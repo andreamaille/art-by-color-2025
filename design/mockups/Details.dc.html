@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Art by Color · Blue and Green Music</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../components.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--wall:#322C30;--paper:#3B3439;--ink:#AFD1CF;--graphite:#8BB881;--hairline:#4A5550;--field-border:#8BB881;--focus:#AFD1CF;--font-display:"Bodoni Moda",Didot,Georgia,serif;--font-sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--radius-none:0px;--radius-sm:2px;--radius-pill:999px}
+body{margin:0;background:#322C30}
+a{color:#AFD1CF}a:hover{color:#8BB881}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #322C30; color: #AFD1CF; font-family: 'Schibsted Grotesk', Arial, sans-serif">
+  <div style="max-width: 1376px; margin: 0 auto; padding: 0 32px; box-sizing: border-box">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 28px 0; border-bottom: 1px solid #4A5550">
+      <a href="Main.dc.html" style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 28px; color: #AFD1CF; text-decoration: none; letter-spacing: -0.3px">Art by <em>Color</em></a>
+      <a href="Main.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; font-weight: 500; text-decoration: none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M14 6l-6 6 6 6"></path></svg>
+        Back to Ultramarine
+      </a>
+    </header>
+
+    <section style="display: flex; flex-wrap: wrap; gap: 48px 72px; padding: 72px 0 96px; align-items: center">
+      <figure style="flex: 1 1 560px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 14px">
+        <img src="../images/blue-and-green-music.jpg" alt="Blue and Green Music by Georgia O'Keeffe" style="display: block; width: 100%">
+        <figcaption style="font-size: 13px; color: #8BB881">Image courtesy of the Art Institute of Chicago, public domain</figcaption>
+      </figure>
+      <div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+        <span class="abc-eyebrow" style="color: #8BB881">Georgia O'Keeffe · 1919/21</span>
+        <h1 style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 104px; line-height: 0.92; letter-spacing: -2px; text-wrap: balance">Blue and Green <em>Music</em></h1>
+        <p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.6">[The work's short description from the API goes here, two to four sentences.]</p>
+        <dl class="abc-label" style="border-top: 1px solid #4A5550; padding-top: 24px">
+          <dt style="color: #8BB881">Medium</dt><dd>Oil on canvas</dd>
+          <dt style="color: #8BB881">Origin</dt><dd>United States</dd>
+          <dt style="color: #8BB881">Credit</dt><dd><a href="https://www.artic.edu">Art Institute of Chicago</a></dd>
+        </dl>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px">
+          <button type="button" class="abc-btn" style="background: #8BB881; color: #322C30">Save palette</button>
+          <a href="https://www.artic.edu" class="abc-btn abc-btn--secondary" style="color: #AFD1CF; border-color: #8BB881">View at the museum</a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="pal" style="border-top: 1px solid #AFD1CF; padding: 32px 0 96px; display: flex; flex-direction: column; gap: 32px">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span class="abc-eyebrow" style="color: #8BB881">Five colors, sorted by how much of the canvas they cover</span>
+          <h2 id="pal" style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -1px">The <em>palette</em></h2>
+        </div>
+        <div role="group" aria-label="Color format" style="display: flex; gap: 4px; border: 1px solid #8BB881; border-radius: 999px; padding: 4px">
+          <sc-for list="{{formats}}" as="f" hint-placeholder-count="3">
+            <button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0">
+        <sc-for list="{{swatches}}" as="s" hint-placeholder-count="5">
+          <button type="button" onClick="{{s.copy}}" aria-label="Copy {{s.value}}" style="border: 0; padding: 0; background: transparent; color: #AFD1CF; cursor: pointer; text-align: left; font: inherit; display: flex; flex-direction: column; gap: 14px">
+            <span style="display: block; height: 340px; background: {{s.hex}}"></span>
+            <span style="display: flex; flex-direction: column; gap: 4px; padding: 0 16px 0 0">
+              <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 22px">{{s.role}}</span>
+              <span class="abc-hex" style="font-size: 15px">{{s.label}}</span>
+              <span style="font-size: 13px; color: #8BB881">{{s.share}}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+      <p aria-live="polite" style="margin: 0; font-size: 14px; min-height: 20px">{{status}}</p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <button type="button" onClick="{{copyCss}}" class="abc-btn" style="background: #8BB881; color: #322C30">{{cssLabel}}</button>
+        <button type="button" class="abc-btn abc-btn--secondary" style="color: #AFD1CF; border-color: #8BB881">Copy Tailwind colors</button>
+        <button type="button" class="abc-btn abc-btn--secondary" style="color: #AFD1CF; border-color: #8BB881">Download palette PNG</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="use" style="border-top: 1px solid #AFD1CF; padding: 32px 0 96px; display: flex; flex-direction: column; gap: 40px">
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px">
+        <span class="abc-eyebrow" style="color: #8BB881">Try it before you take it</span>
+        <h2 id="use" style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1; letter-spacing: -1px">The palette <em>in use</em></h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 14px">
+          <div aria-hidden="true" style="position: relative; aspect-ratio: 3 / 4; background: #335E4A; overflow: hidden">
+            <div style="position: absolute; right: -60px; top: 48px; width: 260px; height: 260px; border-radius: 999px; background: #41838C"></div>
+            <div style="position: absolute; left: 0; right: 0; bottom: 120px; height: 18px; background: #8BB881"></div>
+            <div style="position: absolute; left: 28px; top: 28px; font-size: 12px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: #AFD1CF">Spring concert series</div>
+            <div style="position: absolute; left: 24px; bottom: 24px; font-family: 'Bodoni Moda', Georgia, serif; font-size: 76px; line-height: 0.9; color: #AFD1CF"><em>Music</em><br>in green</div>
+          </div>
+          <figcaption style="display: flex; justify-content: space-between; font-size: 14px"><span>Poster</span><span style="color: #8BB881">Ground: Support 1</span></figcaption>
+        </figure>
+
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 14px">
+          <div aria-hidden="true" style="aspect-ratio: 3 / 4; background: #AFD1CF; color: #322C30; display: flex; flex-direction: column">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; font-size: 12px; font-weight: 600; border-bottom: 1px solid #41838C">
+              <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 18px; font-weight: 400">Studio Verde</span><span>Work · About · Contact</span>
+            </div>
+            <div style="flex: 1; padding: 28px 22px; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px">
+              <div style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 44px; line-height: 1">Quiet rooms, <em>bright</em> ideas.</div>
+              <div style="font-size: 14px; line-height: 1.5">A small interiors studio working in color and light.</div>
+              <span style="align-self: flex-start; background: #335E4A; color: #AFD1CF; border-radius: 999px; padding: 12px 20px; font-size: 13px; font-weight: 600">Book a visit</span>
+            </div>
+            <div style="display: flex; height: 64px"><span style="flex: 2; background: #322C30"></span><span style="flex: 1; background: #41838C"></span><span style="flex: 1; background: #8BB881"></span></div>
+          </div>
+          <figcaption style="display: flex; justify-content: space-between; font-size: 14px"><span>Landing page</span><span style="color: #8BB881">Ground: Text</span></figcaption>
+        </figure>
+
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 14px">
+          <div style="aspect-ratio: 3 / 4; border: 1px solid #4A5550; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 0">
+            <span class="abc-eyebrow" style="color: #8BB881; padding-bottom: 16px">Pairs and contrast</span>
+            <sc-for list="{{pairs}}" as="p" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #4A5550">
+                <span style="width: 56px; height: 40px; flex: none; display: flex; align-items: center; justify-content: center; font-family: 'Bodoni Moda', Georgia, serif; font-size: 20px; background: {{p.bg}}; color: {{p.fg}}">Aa</span>
+                <span style="flex: 1; min-width: 0; font-size: 14px; line-height: 1.35">{{p.name}}<br><span style="color: #8BB881; font-size: 13px">{{p.verdict}}</span></span>
+                <span class="abc-hex" style="font-size: 15px">{{p.ratio}}</span>
+              </div>
+            </sc-for>
+          </div>
+          <figcaption style="display: flex; justify-content: space-between; font-size: 14px"><span>Text pairs</span><span style="color: #8BB881">WCAG 2.2 ratios</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="more" style="border-top: 1px solid #AFD1CF; padding: 32px 0 96px; display: flex; flex-direction: column; gap: 40px">
+      <h2 id="more" style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1.05">Works in a <em>similar key</em></h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: start">
+        <a href="Details.dc.html" class="abc-card" style="color: #AFD1CF">
+          <img class="abc-card__img" src="../images/machu-picchu-morning-light.jpg" alt="Peru – Machu Picchu, Morning Light by Georgia O'Keeffe">
+          <h3 class="abc-card__title">Peru – Machu Picchu, Morning Light</h3>
+          <span class="abc-card__meta" style="color: #8BB881">Georgia O'Keeffe, 1957</span>
+        </a>
+        <a href="Details.dc.html" class="abc-card" style="color: #AFD1CF">
+          <img class="abc-card__img" src="../images/abiquiu-sand-hills-and-mesa.jpg" alt="Abiquiu Sand Hills and Mesa by Georgia O'Keeffe">
+          <h3 class="abc-card__title">Abiquiu Sand Hills and Mesa</h3>
+          <span class="abc-card__meta" style="color: #8BB881">Georgia O'Keeffe, 1945</span>
+        </a>
+        <a href="Details.dc.html" class="abc-card" style="color: #AFD1CF">
+          <img class="abc-card__img" src="../images/arrival-of-the-normandy-train.jpg" alt="Arrival of the Normandy Train, Gare Saint-Lazare by Claude Monet">
+          <h3 class="abc-card__title">Arrival of the Normandy Train, Gare Saint-Lazare</h3>
+          <span class="abc-card__meta" style="color: #8BB881">Claude Monet, 1877</span>
+        </a>
+      </div>
+    </section>
+
+    <footer style="border-top: 1px solid #4A5550; padding: 28px 0 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #8BB881">
+      <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 20px; color: #AFD1CF">Art by <em>Color</em></span>
+      <span>Images and data from the <a href="https://www.artic.edu">Art Institute of Chicago</a> API. Made by andrea_codes.</span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fmt: 'hex', copied: -1, cssCopied: false };
+  }
+  rgb(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  fmtColor(hex, fmt) {
+    var c = this.rgb(hex);
+    if (fmt === 'rgb') return 'rgb(' + c.join(', ') + ')';
+    if (fmt === 'hsl') {
+      var r = c[0] / 255, g = c[1] / 255, b = c[2] / 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, h = 0, s = 0;
+      if (max !== min) {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        h = h * 60;
+      }
+      return 'hsl(' + Math.round(h) + ', ' + Math.round(s * 100) + '%, ' + Math.round(l * 100) + '%)';
+    }
+    return hex;
+  }
+  write(text) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+  }
+  renderVals() {
+    var self = this;
+    var fmt = this.state.fmt;
+    var pal = [
+      ['Ground', '#322C30', 'Largest share'],
+      ['Support 1', '#335E4A', 'Second'],
+      ['Text', '#AFD1CF', 'Third'],
+      ['Feature', '#8BB881', 'Fourth'],
+      ['Support 2', '#41838C', 'Fifth']
+    ];
+    var swatches = pal.map(function (p, i) {
+      var value = self.fmtColor(p[1], fmt);
+      return {
+        role: p[0], hex: p[1], share: p[2], value: value,
+        label: self.state.copied === i ? 'Copied' : value,
+        copy: function () {
+          self.write(value);
+          self.setState({ copied: i });
+          setTimeout(function () { if (self.state.copied === i) self.setState({ copied: -1 }); }, 1400);
+        }
+      };
+    });
+    var formats = [['hex', 'HEX'], ['rgb', 'RGB'], ['hsl', 'HSL']].map(function (f) {
+      var on = f[0] === fmt;
+      return {
+        label: f[1], on: on ? 'true' : 'false',
+        pick: function () { self.setState({ fmt: f[0], copied: -1 }); },
+        style: 'min-height: 40px; min-width: 64px; padding: 0 14px; border: 0; border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500; cursor: pointer; ' + (on ? 'background: #AFD1CF; color: #322C30;' : 'background: transparent; color: #AFD1CF;')
+      };
+    });
+    var pairs = [
+      { name: 'Text on Ground', bg: '#322C30', fg: '#AFD1CF', ratio: '8.3:1', verdict: 'Body text, AAA' },
+      { name: 'Ground on Feature', bg: '#8BB881', fg: '#322C30', ratio: '6.0:1', verdict: 'Buttons and body, AA' },
+      { name: 'Text on Support 1', bg: '#335E4A', fg: '#AFD1CF', ratio: '4.5:1', verdict: 'Body text, AA' },
+      { name: 'Feature on Support 1', bg: '#335E4A', fg: '#8BB881', ratio: '3.3:1', verdict: 'Large text only' },
+      { name: 'Support 2 on Ground', bg: '#322C30', fg: '#41838C', ratio: '3.2:1', verdict: 'Large text and shapes' }
+    ];
+    var css = pal.map(function (p) { return '  --' + p[0].toLowerCase().replace(' ', '-') + ': ' + self.fmtColor(p[1], fmt) + ';'; }).join('\n');
+    var copiedIdx = this.state.copied;
+    return {
+      swatches: swatches,
+      formats: formats,
+      pairs: pairs,
+      status: copiedIdx >= 0 ? 'Copied ' + swatches[copiedIdx].value + ' to your clipboard.' : (this.state.cssCopied ? 'Copied the palette as CSS variables.' : 'Click any color to copy it.'),
+      cssLabel: this.state.cssCopied ? 'Copied' : 'Copy CSS variables',
+      copyCss: function () {
+        self.write(':root {\n' + css + '\n}');
+        self.setState({ cssCopied: true, copied: -1 });
+        setTimeout(function () { self.setState({ cssCopied: false }); }, 1400);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

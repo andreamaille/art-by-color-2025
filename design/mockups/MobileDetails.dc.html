@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Art by Color · Mobile artwork page</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../components.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--wall:#322C30;--paper:#3B3439;--ink:#AFD1CF;--graphite:#8BB881;--hairline:#4A5550;--field-border:#8BB881;--focus:#AFD1CF;--font-display:"Bodoni Moda",Didot,Georgia,serif;--font-sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--radius-none:0px;--radius-sm:2px;--radius-pill:999px}
+body{margin:0}
+a{color:#AFD1CF}a:hover{color:#8BB881}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 1900px; background: #322C30; color: #AFD1CF; font-family: 'Schibsted Grotesk', Arial, sans-serif">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 4px; border-bottom: 1px solid #4A5550">
+    <a href="Mobile.dc.html" aria-label="Back to Ultramarine" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M14 6l-6 6 6 6"></path></svg>
+    </a>
+    <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 20px">Art by <em>Color</em></span>
+    <button type="button" aria-label="Save palette" style="width: 44px; height: 44px; border: 0; background: transparent; color: #AFD1CF; display: flex; align-items: center; justify-content: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+    </button>
+  </header>
+
+  <img src="../images/blue-and-green-music.jpg" alt="Blue and Green Music by Georgia O'Keeffe" style="display: block; width: 100%; margin-top: 16px">
+
+  <div style="padding: 28px 16px 0; display: flex; flex-direction: column; gap: 18px">
+    <span class="abc-eyebrow" style="color: #8BB881">Georgia O'Keeffe · 1919/21</span>
+    <h1 style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 60px; line-height: 0.95; letter-spacing: -1px">Blue and Green <em>Music</em></h1>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6">[The work's short description from the API goes here.]</p>
+    <dl class="abc-label" style="grid-template-columns: 88px minmax(0, 1fr); border-top: 1px solid #4A5550; padding-top: 18px">
+      <dt style="color: #8BB881">Medium</dt><dd>Oil on canvas</dd>
+      <dt style="color: #8BB881">Origin</dt><dd>United States</dd>
+    </dl>
+  </div>
+
+  <section aria-labelledby="mpal" style="margin-top: 48px; padding: 24px 16px 0; border-top: 1px solid #AFD1CF; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
+      <h2 id="mpal" style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1">The <em>palette</em></h2>
+      <div role="group" aria-label="Color format" style="display: flex; border: 1px solid #8BB881; border-radius: 999px; padding: 2px">
+        <sc-for list="{{formats}}" as="f" hint-placeholder-count="3">
+          <button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <sc-for list="{{swatches}}" as="s" hint-placeholder-count="5">
+        <button type="button" onClick="{{s.copy}}" aria-label="Copy {{s.value}}" style="display: flex; align-items: center; gap: 16px; border: 0; border-top: 1px solid #4A5550; padding: 10px 0; background: transparent; color: #AFD1CF; font: inherit; text-align: left; cursor: pointer; min-height: 72px">
+          <span style="width: 96px; height: 56px; flex: none; background: {{s.hex}}"></span>
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 19px">{{s.role}}</span>
+            <span class="abc-hex" style="font-size: 14px">{{s.label}}</span>
+          </span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><rect x="8" y="8" width="12" height="12"></rect><path d="M16 8V4H4v12h4"></path></svg>
+        </button>
+      </sc-for>
+    </div>
+    <p aria-live="polite" style="margin: 0; font-size: 13px; color: #8BB881; min-height: 18px">{{status}}</p>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <button type="button" onClick="{{copyCss}}" class="abc-btn" style="background: #8BB881; color: #322C30; min-height: 52px">{{cssLabel}}</button>
+      <button type="button" class="abc-btn abc-btn--secondary" style="color: #AFD1CF; border-color: #8BB881; min-height: 52px">Download palette PNG</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="muse" style="margin-top: 48px; padding: 24px 16px 48px; border-top: 1px solid #AFD1CF; display: flex; flex-direction: column; gap: 20px">
+    <h2 id="muse" style="margin: 0; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1">In <em>use</em></h2>
+    <div aria-hidden="true" style="position: relative; height: 420px; background: #335E4A; overflow: hidden">
+      <div style="position: absolute; right: -50px; top: 40px; width: 200px; height: 200px; border-radius: 999px; background: #41838C"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 104px; height: 14px; background: #8BB881"></div>
+      <div style="position: absolute; left: 20px; top: 20px; font-size: 11px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase">Spring concert series</div>
+      <div style="position: absolute; left: 18px; bottom: 18px; font-family: 'Bodoni Moda', Georgia, serif; font-size: 60px; line-height: 0.9"><em>Music</em><br>in green</div>
+    </div>
+    <span style="font-size: 13px; color: #8BB881">Poster on Support 1, swipe for the landing page and contrast pairs</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fmt: 'hex', copied: -1, cssCopied: false };
+  }
+  fmtColor(hex, fmt) {
+    var n = parseInt(hex.slice(1), 16), c = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    if (fmt === 'rgb') return 'rgb(' + c.join(', ') + ')';
+    if (fmt === 'hsl') {
+      var r = c[0] / 255, g = c[1] / 255, b = c[2] / 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, h = 0, s = 0;
+      if (max !== min) {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        h = h * 60;
+      }
+      return 'hsl(' + Math.round(h) + ', ' + Math.round(s * 100) + '%, ' + Math.round(l * 100) + '%)';
+    }
+    return hex;
+  }
+  write(text) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+  }
+  renderVals() {
+    var self = this, fmt = this.state.fmt;
+    var pal = [['Ground', '#322C30'], ['Support 1', '#335E4A'], ['Text', '#AFD1CF'], ['Feature', '#8BB881'], ['Support 2', '#41838C']];
+    var swatches = pal.map(function (p, i) {
+      var value = self.fmtColor(p[1], fmt);
+      return {
+        role: p[0], hex: p[1], value: value,
+        label: self.state.copied === i ? 'Copied' : value,
+        copy: function () {
+          self.write(value);
+          self.setState({ copied: i });
+          setTimeout(function () { if (self.state.copied === i) self.setState({ copied: -1 }); }, 1400);
+        }
+      };
+    });
+    var formats = [['hex', 'HEX'], ['rgb', 'RGB'], ['hsl', 'HSL']].map(function (f) {
+      var on = f[0] === fmt;
+      return {
+        label: f[1], on: on ? 'true' : 'false',
+        pick: function () { self.setState({ fmt: f[0], copied: -1 }); },
+        style: 'min-height: 40px; min-width: 48px; padding: 0 8px; border: 0; border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; cursor: pointer; ' + (on ? 'background: #AFD1CF; color: #322C30;' : 'background: transparent; color: #AFD1CF;')
+      };
+    });
+    var css = pal.map(function (p) { return '  --' + p[0].toLowerCase().replace(' ', '-') + ': ' + self.fmtColor(p[1], fmt) + ';'; }).join('\n');
+    var ci = this.state.copied;
+    return {
+      swatches: swatches, formats: formats,
+      status: ci >= 0 ? 'Copied ' + swatches[ci].value : (this.state.cssCopied ? 'Copied the palette as CSS variables' : 'Tap a color to copy it'),
+      cssLabel: this.state.cssCopied ? 'Copied' : 'Copy CSS variables',
+      copyCss: function () {
+        self.write(':root {\n' + css + '\n}');
+        self.setState({ cssCopied: true, copied: -1 });
+        setTimeout(function () { self.setState({ cssCopied: false }); }, 1400);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
