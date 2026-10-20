@@ -1,26 +1,32 @@
 @import "tailwindcss";
+@import "./styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Map the design tokens (styles/tokens.css) to Tailwind utilities:
+   bg-wall, text-ink, text-graphite, border-hairline, outline-focus, font-display, ... */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-wall: var(--wall);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-hairline: var(--hairline);
+  --color-field-border: var(--field-border);
+  --color-focus: var(--focus);
+  --font-display: var(--font-bodoni);
+  --font-sans: var(--font-schibsted);
+  --font-mono: var(--font-plex-mono);
+  --shadow-drawer: var(--shadow-drawer);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background: var(--wall);
+    color: var(--ink);
+    font-family: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  a {
+    color: var(--focus);
+  }
+  a:hover {
+    color: var(--ink);
+  }
 }

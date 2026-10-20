@@ -1,6 +1,6 @@
 # Art by Color: design spec
 
-The build reference for the redesign. Values come from `tokens.json` (CSS variables in `tokens.css`, component classes in `components.css`). The full brand book is `system/README.md`; this file is the short version plus the final layout decisions from the mock-ups.
+The build reference for the redesign. Values come from `tokens.json` (CSS variables in `tokens.css`, exposed as Tailwind utilities). The full brand book is `system/README.md`; this file is the short version plus the final layout decisions from the mock-ups.
 
 ## Principles
 
@@ -54,7 +54,7 @@ Tokens are `--pigment-<slug>` (e.g. `--pigment-ultramarine`). Ultramarine is als
 
 ## Typography
 
-All three families are on Google Fonts (the `@import` is at the top of `components.css`).
+All three families are on Google Fonts. The app self-hosts them with `next/font/google` (`--font-bodoni`, `--font-schibsted`, `--font-plex-mono`), available as `font-display`, `font-sans` and `font-mono`.
 
 | Style | Family | Size / line height | Weight | Use |
 | --- | --- | --- | --- | --- |
@@ -73,18 +73,28 @@ Use Bodoni italic for one emphasized word per headline (`Find the <em>palette</e
 
 ## Components
 
-Plain CSS classes in `components.css`, all prefixed `abc-`. Guidelines for each live in `system/components/<Name>/README.md`, with an HTML example in `preview.html`.
+**Build with Tailwind.** Style everything with Tailwind utilities, and use the design tokens through the theme in `src/app/globals.css`, not arbitrary values or raw hex:
 
-| Component | Class | Notes |
+| Token | Utilities |
+| --- | --- |
+| `wall`, `paper`, `ink`, `graphite`, `hairline`, `field-border`, `focus` | `bg-wall`, `text-ink`, `text-graphite`, `border-hairline`, `outline-focus`, ... |
+| Fonts | `font-display` (Bodoni Moda), `font-sans` (Schibsted Grotesk), `font-mono` (IBM Plex Mono) |
+| `pigment-*` | Not in the theme. Pass the hex as an inline `style` (it comes from data) or use `var(--pigment-ultramarine)`. |
+
+Repeated patterns become small React components in `src/app/components/` (for example `Button`, `Eyebrow`), not shared CSS classes. Plain CSS is only for what Tailwind can't express.
+
+`components.css` and the `abc-` classes (short for Art By Color) in the mock-ups, `system/components/*/README.md` and `preview.html` are the design-time reference. Read them for values and states, and don't import them: unlayered CSS beats Tailwind utilities on the same element, so mixing them causes override bugs.
+
+| Component | Design name | Notes |
 | --- | --- | --- |
-| Button | `abc-btn` + `--primary` / `--secondary` / `--ghost` | Ink pill, outline, underlined text. 44px min height. |
-| Pigment swatch | `abc-pigment`, `abc-pigment__dot` | Round search control, `aria-pressed`, label "Ultramarine, blue". One pressed at a time. |
+| Button | `abc-btn` + `--primary` / `--secondary` / `--ghost` | Ink pill, outline, underlined text. 44px min height. Built: `components/Button`. |
+| Pigment swatch | `abc-pigment`, `abc-pigment__dot` | Round search control, `aria-pressed`, label "Ultramarine, blue". One pressed at a time. Built inline in `IndexSidebar`. |
 | Palette swatch | `abc-swatch` | One extracted color, copies on click, "Copied" for 1.4s, announced via `aria-live`. |
-| Artwork card | `abc-card`, `abc-card__img`, `abc-card__swatches`, `abc-card__title`, `abc-card__meta` | See "Gallery cards" below. |
+| Artwork card | `abc-card`, `abc-card__img`, `abc-card__swatches`, `abc-card__title`, `abc-card__meta` | See "Gallery cards" below. Built: `components/ArtworkGrid/ArtworkCard`. |
 | Filter chip | `abc-chip` | `aria-pressed` toggle for Medium values. |
 | Search field | `abc-field` | Underlined italic Bodoni input; a hex value switches to color search. |
 | Wall label | `abc-label` | `<dl>` of Artist, Date, Medium, Origin, Credit. |
-| Eyebrow / rule / hex | `abc-eyebrow`, `abc-rule`, `abc-hex` | Utility text styles. |
+| Eyebrow / rule / hex | `abc-eyebrow`, `abc-rule`, `abc-hex` | Utility text styles. Built: `components/Eyebrow`. |
 
 ## Final layout decisions
 

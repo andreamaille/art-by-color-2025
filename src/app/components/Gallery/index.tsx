@@ -35,10 +35,7 @@ const Gallery = async () => {
       {galleryItems.map((item: itemProps) => (
         <div key={item.id}>
           <div>Test: {item.artist_title}</div>
-          <img
-            src={`/api/image/${item.image_id}?w=400`}
-            alt=""
-          />
+          <img src={`/api/image/${item.image_id}?w=400`} alt="" />
         </div>
       ))}
     </div>

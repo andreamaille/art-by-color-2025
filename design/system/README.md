@@ -57,13 +57,13 @@ Styles: `display-xl` 112px for the one headline per page, `display-l` 64px, `dis
 ## Layout
 
 - Desktop: a 12-column grid with a 32px gutter (`space-6`) and 24px column gaps (`space-5`). Headlines start at column 1 and may run across 9 columns; intro text sits in columns 1 to 6.
-- Gallery: a masonry of 3 columns on desktop, 2 on tablet and phone. Each card is the image, then five 36px rectangle swatches 4px below it (`abc-card__swatches`), then `title`, then `caption`. No hex codes on cards; those live on the artwork page.
+- Gallery: a masonry of 3 columns on desktop, 2 on tablet and phone. Each card is the image, then five 36px rectangle swatches 4px below it (`abc-card__swatches` in the original CSS), then `title`, then `caption`. No hex codes on cards; those live on the artwork page.
 - Phone: 16px gutters (`space-4`), the pigment row scrolls sideways, filters open as a full-height sheet.
 - Section spacing: `space-8` (64px) on desktop, `space-7` (48px) on phone.
 
 ## Components
 
-All components are plain CSS classes in `components/bundle.css` with an `abc-` prefix, so they drop into the Next.js app with or without Tailwind.
+The design system ships these as plain CSS classes with an `abc-` prefix (Art By Color). The Next.js app uses Tailwind instead: implement each as Tailwind utilities, with tokens from the theme (`bg-wall`, `text-ink`, `font-display`, ...), and share repeated patterns as React components. See `SPEC.md`, "Components". The names below are the design-time names.
 
 - **Button** (`abc-btn`): primary (ink pill), secondary (outline), ghost (underlined text).
 - **Pigment swatch** (`abc-pigment`): the round search swatch with its pigment name.

@@ -1,0 +1,41 @@
+export const pigments = [
+  { slug: "cadmium-red", name: "Cadmium Red", term: "red", hex: "#C8372D" },
+  {
+    slug: "cadmium-orange",
+    name: "Cadmium Orange",
+    term: "orange",
+    hex: "#E0782B",
+  },
+  {
+    slug: "cadmium-yellow",
+    name: "Cadmium Yellow",
+    term: "yellow",
+    hex: "#EDC12B",
+  },
+  { slug: "sap-green", name: "Sap Green", term: "olive", hex: "#6E8B2E" },
+  { slug: "viridian", name: "Viridian", term: "green", hex: "#2E7D63" },
+  { slug: "cobalt-teal", name: "Cobalt Teal", term: "teal", hex: "#2A8E98" },
+  { slug: "cerulean", name: "Cerulean", term: "light blue", hex: "#3E8FD0" },
+  { slug: "ultramarine", name: "Ultramarine", term: "blue", hex: "#2C3FC7" },
+  {
+    slug: "dioxazine-violet",
+    name: "Dioxazine Violet",
+    term: "violet",
+    hex: "#5B3A92",
+  },
+  {
+    slug: "quinacridone-rose",
+    name: "Quinacridone Rose",
+    term: "pink",
+    hex: "#C94C7E",
+  },
+  { slug: "burnt-sienna", name: "Burnt Sienna", term: "brown", hex: "#8A4A2B" },
+  { slug: "paynes-grey", name: "Payne's Grey", term: "grey", hex: "#4E5A65" },
+  { slug: "ivory-black", name: "Ivory Black", term: "black", hex: "#1E1D1B" },
+  {
+    slug: "titanium-white",
+    name: "Titanium White",
+    term: "white",
+    hex: "#F4F2EC",
+  },
+] as const;
