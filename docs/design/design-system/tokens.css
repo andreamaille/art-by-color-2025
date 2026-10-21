@@ -1,0 +1,52 @@
+/* Art by Color tokens, generated from tokens.json. Gallery (light) is the default; Night gallery is dark. */
+:root {
+  --wall: #FAFAF8;
+  --paper: #FFFFFF;
+  --ink: #141413;
+  --graphite: #5B5A55;
+  --hairline: #DCDAD3;
+  --field-border: #8C8A83;
+  --focus: #2C3FC7;
+  --pigment-cadmium-red: #C8372D;
+  --pigment-cadmium-orange: #E0782B;
+  --pigment-cadmium-yellow: #EDC12B;
+  --pigment-sap-green: #6E8B2E;
+  --pigment-viridian: #2E7D63;
+  --pigment-cobalt-teal: #2A8E98;
+  --pigment-cerulean: #3E8FD0;
+  --pigment-ultramarine: #2C3FC7;
+  --pigment-dioxazine-violet: #5B3A92;
+  --pigment-quinacridone-rose: #C94C7E;
+  --pigment-burnt-sienna: #8A4A2B;
+  --pigment-paynes-grey: #4E5A65;
+  --pigment-ivory-black: #1E1D1B;
+  --pigment-titanium-white: #F4F2EC;
+  --font-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+  --shadow-drawer: -24px 0 64px rgba(20,20,19,0.16);
+}
+
+[data-theme="dark"] {
+  --wall: #121211;
+  --paper: #1B1B19;
+  --ink: #F2F1EC;
+  --graphite: #A7A59E;
+  --hairline: #34332F;
+  --field-border: #77756E;
+  --focus: #8E9BFF;
+  --shadow-drawer: -24px 0 64px rgba(0,0,0,0.5);
+}

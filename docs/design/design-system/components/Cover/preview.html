@@ -1,0 +1,32 @@
+<!-- @dsCard height=300 -->
+<div style="position:relative;width:960px;height:300px;background:var(--wall);overflow:hidden">
+  <svg width="960" height="300" viewBox="0 0 960 300" aria-hidden="true" style="position:absolute;inset:0">
+    <!--
+      blocks: pigment-ultramarine 224x300 (slab), pigment-cadmium-yellow 176x128, pigment-viridian 96x172, pigment-quinacridone-rose 80x96, ink 80x76; radius-none
+      arrangement: one tall slab bleeding top and bottom with paint-chip satellites stacked flush to the right edge
+      pattern: a distinctive display face, so one oversized italic Bodoni "C" cut out of the ultramarine slab in wall; three hairline rules in the gap like a label's baselines
+      steps: space-10 (128) and space-8 (64) set the rule pitch and block heights; radius-none on every block because art is never rounded
+    -->
+    <defs><clipPath id="slab"><rect x="560" y="0" width="224" height="300"></rect></clipPath></defs>
+    <style>
+      .u{fill:var(--pigment-ultramarine)} .y{fill:var(--pigment-cadmium-yellow)} .v{fill:var(--pigment-viridian)}
+      .r{fill:var(--pigment-quinacridone-rose)} .k{fill:var(--ink)} .w{fill:var(--wall)}
+      .h{stroke:var(--hairline);stroke-width:1}
+      .g{font-family:var(--font-display);font-style:italic;font-size:420px}
+    </style>
+    <line class="h" x1="488" y1="64" x2="552" y2="64"></line>
+    <line class="h" x1="488" y1="128" x2="552" y2="128"></line>
+    <line class="h" x1="488" y1="192" x2="552" y2="192"></line>
+    <rect class="u" x="560" y="0" width="224" height="300"></rect>
+    <text class="w g" x="548" y="330" clip-path="url(#slab)">C</text>
+    <rect class="y" x="784" y="0" width="176" height="128"></rect>
+    <rect class="v" x="784" y="128" width="96" height="172"></rect>
+    <rect class="r" x="880" y="128" width="80" height="96"></rect>
+    <rect class="k" x="880" y="224" width="80" height="76"></rect>
+  </svg>
+  <div style="position:absolute;left:40px;bottom:36px;max-width:420px;display:flex;flex-direction:column;gap:12px">
+    <div style="font-family:var(--font-display);font-size:96px;line-height:.95;color:var(--ink);letter-spacing:-1.5px">Art by<br><em>Color</em></div>
+    <div style="font-family:var(--font-sans);font-size:14px;color:var(--graphite)">Discover color palettes by exploring art, powered by the Art Institute of Chicago.</div>
+  </div>
+</div>
+<script></script>
