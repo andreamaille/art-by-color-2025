@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Card palette 6 · Rectangles under the image</title>
+<script src="preview.js"></script>
+<link rel="stylesheet" href="../design-system/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--wall:#FAFAF8;--paper:#FFFFFF;--ink:#141413;--graphite:#5B5A55;--hairline:#DCDAD3;--field-border:#8C8A83;--focus:#2C3FC7;--font-display:"Bodoni Moda",Didot,Georgia,serif;--font-sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--radius-none:0px;--radius-sm:2px;--radius-pill:999px}
+body{margin:0;background:#FAFAF8}
+</style>
+</helmet>
+<div style="min-height: 1400px; background: #FAFAF8; color: #141413; font-family: 'Schibsted Grotesk', Arial, sans-serif; padding: 64px 32px; box-sizing: border-box">
+  <div style="max-width: 1040px; margin: 0 auto; columns: 3 240px; column-gap: 32px">
+    <sc-for list="{{cards}}" as="c" hint-placeholder-count="6">
+      <a href="artwork.html" class="abc-card" style="margin-bottom: 56px; gap: 0">
+        <img class="abc-card__img" src="{{c.img}}" alt="{{c.alt}}">
+        <span aria-label="Palette" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; margin-top: 4px">
+          <sc-for list="{{c.pal}}" as="p" hint-placeholder-count="5">
+            <span title="{{p.hex}}" style="height: 36px; background: {{p.hex}}"></span>
+          </sc-for>
+        </span>
+        <h3 class="abc-card__title" style="font-size: 20px; margin-top: 16px">{{c.title}}</h3>
+        <span class="abc-card__meta" style="margin-top: 6px">{{c.meta}}</span>
+      </a>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    function pal(list) { return list.map(function (x) { return { hex: x }; }); }
+    return { cards: [
+      { img: '../images/bluegreen.jpg', title: 'Blue and Green Music', meta: "Georgia O'Keeffe, 1919/21", alt: "Blue and Green Music by Georgia O'Keeffe", pal: pal(['#322C30', '#335E4A', '#AFD1CF', '#8BB881', '#41838C']) },
+      { img: '../images/monet.jpg', title: 'Arrival of the Normandy Train, Gare Saint-Lazare', meta: 'Claude Monet, 1877', alt: 'Arrival of the Normandy Train, Gare Saint-Lazare by Claude Monet', pal: pal(['#536457', '#ABB1B2', '#7F8F92', '#5E737D', '#252E33']) },
+      { img: '../images/machu.jpg', title: 'Peru – Machu Picchu, Morning Light', meta: "Georgia O'Keeffe, 1957", alt: "Peru – Machu Picchu, Morning Light by Georgia O'Keeffe", pal: pal(['#809FCD', '#2E5398', '#13341F', '#E9F4EA', '#B5AD2C']) },
+      { img: '../images/abiquiu.jpg', title: 'Abiquiu Sand Hills and Mesa', meta: "Georgia O'Keeffe, 1945", alt: "Abiquiu Sand Hills and Mesa by Georgia O'Keeffe", pal: pal(['#494C41', '#CFB792', '#8D8269', '#6D6A56', '#9FBDC5']) },
+      { img: '../images/pissarro.jpg', title: 'Woman Mending', meta: 'Camille Pissarro, 1895', alt: 'Woman Mending by Camille Pissarro', pal: pal(['#858178', '#6B6A6A', '#C7C1B0', '#4F4A4F', '#AB9E8E']) },
+      { img: '../images/thanks.jpg', title: 'Thanksgiving', meta: 'Doris Lee, c. 1935', alt: 'Thanksgiving by Doris Lee', pal: pal(['#625244', '#A7A189', '#9A795D', '#62382A', '#2A1B1B']) }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<!-- @dsCard group="Search" height=100 subtitle="Medium filters" -->
+<div style="display:flex;flex-wrap:wrap;gap:8px;padding:24px;background:var(--wall)">
+  <button class="abc-chip" type="button" aria-pressed="true">Painting</button>
+  <button class="abc-chip" type="button" aria-pressed="false">Print</button>
+  <button class="abc-chip" type="button" aria-pressed="false">Drawing</button>
+  <button class="abc-chip" type="button" aria-pressed="false">Photograph</button>
+  <button class="abc-chip" type="button" aria-pressed="false">Textile</button>
+</div>
+<script>document.querySelectorAll('.abc-chip').forEach(function(b){b.onclick=function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true')}})</script>

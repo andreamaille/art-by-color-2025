@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Facets D · Index sidebar</title>
+<script src="preview.js"></script>
+<link rel="stylesheet" href="../design-system/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Schibsted+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--wall:#FAFAF8;--paper:#FFFFFF;--ink:#141413;--graphite:#5B5A55;--hairline:#DCDAD3;--field-border:#8C8A83;--focus:#2C3FC7;--font-display:"Bodoni Moda",Didot,Georgia,serif;--font-sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--radius-none:0px;--radius-sm:2px;--radius-pill:999px}
+body{margin:0;background:#FAFAF8}
+a{color:#2C3FC7}a:hover{color:#141413}
+.row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;border:0;border-top:1px solid #DCDAD3;background:transparent;padding:16px 0;text-align:left;cursor:pointer;color:#141413;font:inherit}
+.row:focus-visible{outline:2px solid #2C3FC7;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 1000px; background: #FAFAF8; color: #141413; font-family: 'Schibsted Grotesk', Arial, sans-serif">
+  <div style="max-width: 1376px; margin: 0 auto; padding: 0 32px; box-sizing: border-box">
+    <header style="display: flex; align-items: center; justify-content: space-between; padding: 28px 0; border-bottom: 1px solid #DCDAD3">
+      <span style="font-family: 'Bodoni Moda', Georgia, serif; font-size: 28px">Art by <em>Color</em></span>
+      <nav aria-label="Main" style="display: flex; gap: 28px; font-size: 14px; font-weight: 500"><span>Gallery</span><span>Saved palettes</span><span>About</span></nav>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 48px 64px; padding-top: 48px">
+      <aside aria-label="Search" style="flex: 1 1 260px; max-width: 300px; display: flex; flex-direction: column">
+        <span class="abc-eyebrow" style="padding-bottom: 16px">Index</span>
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+          <div style="display: flex; flex-direction: column">
+            <button type="button" class="row" aria-expanded="{{r.expanded}}" onClick="{{r.toggle}}">
+              <span style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+                <span class="abc-eyebrow">{{r.label}}</span>
+                <span style="display: flex; align-items: center; gap: 10px; font-family: 'Bodoni Moda', Georgia, serif; font-style: italic; font-size: 22px; line-height: 1.2">
+                  <sc-if value="{{r.isColor}}" hint-placeholder-val="{{false}}"><span style="width: 18px; height: 18px; border-radius: 999px; flex: none; background: {{hex}}"></span></sc-if>
+                  {{r.value}}
+                </span>
+              </span>
+              <span aria-hidden="true" style="font-size: 20px; line-height: 1; padding-top: 22px; color: #5B5A55">{{r.sign}}</span>
+            </button>
+            <sc-if value="{{r.showPigments}}" hint-placeholder-val="{{false}}">
+              <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; padding: 0 0 20px">
+                <sc-for list="{{pigments}}" as="p" hint-placeholder-count="14">
+                  <button type="button" class="abc-pigment" aria-pressed="{{p.pressed}}" aria-label="{{p.label}}" title="{{p.name}}" onClick="{{p.pick}}" style="width: 40px; height: 44px; justify-content: center">
+                    <span class="abc-pigment__dot" style="width: 28px; height: 28px; background: {{p.hex}}"></span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="border-top: 1px solid #DCDAD3; padding-top: 16px">
+          <button type="button" class="abc-btn abc-btn--ghost" style="padding: 0">Clear all</button>
+        </div>
+      </aside>
+
+      <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+        <div style="columns: 3 220px; column-gap: 32px">
+          <a href="artwork.html" class="abc-card" style="margin-bottom: 40px"><img class="abc-card__img" src="../images/bluegreen.jpg" alt="Blue and Green Music by Georgia O'Keeffe"><h3 class="abc-card__title" style="font-size: 19px">Blue and Green Music</h3><span class="abc-card__meta">Georgia O'Keeffe, 1919/21</span></a>
+          <a href="artwork.html" class="abc-card" style="margin-bottom: 40px"><img class="abc-card__img" src="../images/monet.jpg" alt="Arrival of the Normandy Train, Gare Saint-Lazare by Claude Monet"><h3 class="abc-card__title" style="font-size: 19px">Arrival of the Normandy Train, Gare Saint-Lazare</h3><span class="abc-card__meta">Claude Monet, 1877</span></a>
+          <a href="artwork.html" class="abc-card" style="margin-bottom: 40px"><img class="abc-card__img" src="../images/machu.jpg" alt="Peru – Machu Picchu, Morning Light by Georgia O'Keeffe"><h3 class="abc-card__title" style="font-size: 19px">Peru – Machu Picchu, Morning Light</h3><span class="abc-card__meta">Georgia O'Keeffe, 1957</span></a>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 'ultramarine', open: 'color' };
+  }
+  renderVals() {
+    var self = this;
+    var list = [
+      ['cadmium-red', 'Cadmium Red', 'red', '#C8372D'], ['cadmium-orange', 'Cadmium Orange', 'orange', '#E0782B'],
+      ['cadmium-yellow', 'Cadmium Yellow', 'yellow', '#EDC12B'], ['sap-green', 'Sap Green', 'olive', '#6E8B2E'],
+      ['viridian', 'Viridian', 'green', '#2E7D63'], ['cobalt-teal', 'Cobalt Teal', 'teal', '#2A8E98'],
+      ['cerulean', 'Cerulean', 'light blue', '#3E8FD0'], ['ultramarine', 'Ultramarine', 'blue', '#2C3FC7'],
+      ['dioxazine-violet', 'Dioxazine Violet', 'violet', '#5B3A92'], ['quinacridone-rose', 'Quinacridone Rose', 'pink', '#C94C7E'],
+      ['burnt-sienna', 'Burnt Sienna', 'brown', '#8A4A2B'], ['paynes-grey', "Payne's Grey", 'grey', '#4E5A65'],
+      ['ivory-black', 'Ivory Black', 'black', '#1E1D1B'], ['titanium-white', 'Titanium White', 'white', '#F4F2EC']
+    ];
+    var cur = list.filter(function (x) { return x[0] === self.state.picked; })[0] || list[7];
+    var open = this.state.open;
+    var defs = [['color', 'Color', cur[1]], ['medium', 'Medium', 'Painting'], ['date', 'Date', '1800 to 1950'], ['place', 'Place', 'Anywhere'], ['find', 'Artist or title', 'Anyone']];
+    return {
+      rows: defs.map(function (d) {
+        var on = open === d[0];
+        return {
+          label: d[1], value: d[2], isColor: d[0] === 'color', showPigments: d[0] === 'color' && on,
+          expanded: on ? 'true' : 'false', sign: on ? '−' : '+',
+          toggle: function () { self.setState({ open: on ? '' : d[0] }); }
+        };
+      }),
+      pigments: list.map(function (x) {
+        return { name: x[1], hex: x[3], label: x[1] + ', ' + x[2], pressed: x[0] === self.state.picked ? 'true' : 'false', pick: function () { self.setState({ picked: x[0] }); } };
+      }),
+      name: cur[1], hex: cur[3]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<!-- @dsCard group="Palette" height=260 subtitle="Blue and Green Music, click to copy" -->
+<div id="p" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;padding:24px;background:var(--wall);color:var(--ink)"></div>
+<script>
+var c=[["Ground","#322C30"],["Support","#335E4A"],["Feature","#41838C"],["Support","#8BB881"],["Text","#AFD1CF"]];
+var root=document.getElementById('p');
+c.forEach(function(x){var b=document.createElement('button');b.type='button';b.className='abc-swatch';b.setAttribute('aria-label','Copy '+x[1]);b.innerHTML='<span class="abc-swatch__chip" style="background:'+x[1]+'"></span><span class="abc-swatch__name">'+x[0]+'</span><span class="abc-swatch__value">'+x[1]+'</span>';b.onclick=function(){try{navigator.clipboard.writeText(x[1])}catch(e){}var v=b.querySelector('.abc-swatch__value');v.textContent='Copied';setTimeout(function(){v.textContent=x[1]},1400)};root.appendChild(b)});
+</script>
