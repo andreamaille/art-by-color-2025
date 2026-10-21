@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 type EyebrowProps = ComponentPropsWithoutRef<"span"> & {
-  as?: "span" | "label";
+  as?: "span" | "label" | "dt";
   htmlFor?: string;
 };
 

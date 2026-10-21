@@ -1,5 +1,6 @@
 import { colorWindow } from "@/app/lib/color";
 import { type Filters, MEDIA } from "@/app/lib/filters";
+import { fetchPalette } from "@/app/lib/palette";
 
 export interface Artwork {
   id: number;
@@ -10,9 +11,31 @@ export interface Artwork {
   thumbnail: { alt_text: string | null; width: number; height: number };
   /** Null for works the API has not analyzed. */
   color: { h: number; s: number; l: number; percentage: number } | null;
+  /** Five hex colors (no "#"), or null if the image couldn't be read. */
+  palette: string[] | null;
 }
 
+type ArtworkRecord = Omit<Artwork, "palette">;
+
 export const PAGE_SIZE = 24;
+// Images are fetched a few at a time, to be kind to the museum's image server.
+const PALETTE_CONCURRENCY = 6;
+
+/** Adds each work's palette. One that can't be read just has none; the card falls back. */
+async function withPalettes(records: ArtworkRecord[]): Promise<Artwork[]> {
+  const artworks: Artwork[] = records.map((r) => ({ ...r, palette: null }));
+  let next = 0;
+  const worker = async () => {
+    while (next < artworks.length) {
+      const artwork = artworks[next++];
+      artwork.palette = await fetchPalette(artwork.image_id)
+        .then((colors) => colors.map((c) => c.hex))
+        .catch(() => null);
+    }
+  };
+  await Promise.all(Array.from({ length: PALETTE_CONCURRENCY }, worker));
+  return artworks;
+}
 
 const FIELDS = [
   "id",
@@ -58,6 +81,7 @@ function closeness(
 export async function fetchArtworks(
   filters: Filters,
   page = 1,
+  limit = PAGE_SIZE,
 ): Promise<{ artworks: Artwork[]; hasMore: boolean }> {
   const types = MEDIA.filter((m) => filters.media.includes(m.slug)).map(
     (m) => m.type,
@@ -121,7 +145,7 @@ export async function fetchArtworks(
       "Content-Type": "application/json",
       "AIC-User-Agent": "art-by-color (andrea.maille@gmail.com)",
     },
-    body: JSON.stringify({ query, fields: FIELDS, limit: PAGE_SIZE, page }),
+    body: JSON.stringify({ query, fields: FIELDS, limit, page }),
     next: { revalidate: 60 * 60 },
   });
 
@@ -131,7 +155,7 @@ export async function fetchArtworks(
 
   const result = await response.json();
   return {
-    artworks: result.data,
+    artworks: await withPalettes(result.data),
     hasMore: result.pagination.current_page < result.pagination.total_pages,
   };
 }

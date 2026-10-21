@@ -42,7 +42,7 @@ On an artwork's page the five extracted colors replace the theme for that page, 
 | Ground | the darkest color | Full-bleed page background |
 | Text | the lightest color | Title, body, labels (check 4.5:1 against Ground; fall back to `ink` or `paper`) |
 | Feature | the most saturated color | One big color field and the primary button |
-| Support 1, 2 | the remaining two | The "palette in use" examples and rules |
+| Support 1, 2 | the remaining two | The "palette in use" examples and the rules |
 
 If the lightest color is under 4.5:1 against the darkest, use `paper` for text on dark grounds and `ink` on light grounds. The palette section itself always shows all five at full value regardless.
 

@@ -11,6 +11,8 @@
   --color-hairline: var(--hairline);
   --color-field-border: var(--field-border);
   --color-focus: var(--focus);
+  --color-feature: var(--feature);
+  --color-on-feature: var(--on-feature);
   --font-display: var(--font-bodoni);
   --font-sans: var(--font-schibsted);
   --font-mono: var(--font-plex-mono);
@@ -18,6 +20,11 @@
 }
 
 @layer base {
+  /* An artwork page overrides these with colors from its own palette. */
+  :root {
+    --feature: var(--ink);
+    --on-feature: var(--wall);
+  }
   body {
     background: var(--wall);
     color: var(--ink);
